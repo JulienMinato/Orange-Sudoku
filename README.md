@@ -22,14 +22,19 @@ Cell:: Int | Maybe(Int)
 
 There are 2 cases for the content of a cell, it could either be a given digit, which is fixed, or a possible digit.
 
+
 Row:: [Cell]
 
 A row is a list of cells. For a 9*9 Sudoku puzzles, there would be 9 cells in a row.
+
+
+
 Col:: [Cell]
 
 This is basically the same idea as Row, the only difference is the cells are lined up in a vertical way in the puzzle.
-Square:: [[Cell]]
 
+
+Square:: [[Cell]]
 
 A square is a 3*3 Digits list. For a 9*9 sudoku, there are 9 squares. 
 
