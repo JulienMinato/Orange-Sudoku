@@ -6,6 +6,7 @@ Why did we do this? As computer security expert Ben Laurie has stated, Sudoku is
 One of the most famous solutions is Norvig’s sudoku solver which also implemented in different languages such as C++, Java, Ruby and Haskell, Norvig’s approach includes two crucial ideas: constraint propagation and search, In the Haskell version, the author offers a pretty straightforward implementation by using modules such as Data.list, Data.Map and Control.Monad, we can do some refactoring by taking this articles as reference.
 Peter Norvig's constraint propagation algorithm is learned and adopted by many people to solve Sudoku problems. And Emmanuel Delaborde's Haskell version is truly beautiful. Maybe Grid's abstraction is very clever, foldM is used concisely. Our plan is generating an algorithm to solve other constraint satisfaction problems such as tic-tac-toe.
 
+https://hackage.haskell.org/package/csp-1.4.0/docs/Control-Monad-CSP.html#v:solveCSP
 
 http://www.cs.yale.edu/homes/piskac/papers/2019HallahanETALquasiquoter.pdf
 
