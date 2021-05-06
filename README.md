@@ -7,6 +7,8 @@ One of the most famous solutions is Norvig’s sudoku solver which also implemen
 Peter Norvig's constraint propagation algorithm is learned and adopted by many people to solve Sudoku problems. And Emmanuel Delaborde's Haskell version is truly beautiful. Maybe Grid's abstraction is very clever, foldM is used concisely. Our plan is generating an algorithm to solve other constraint satisfaction problems such as tic-tac-toe.
 
 
+http://www.cs.yale.edu/homes/piskac/papers/2019HallahanETALquasiquoter.pdf
+
 ### How to run
 
 Install Cable
