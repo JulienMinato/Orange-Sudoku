@@ -52,12 +52,6 @@ The sudoku problem can be generalized into CSP wherein the values in the cell co
 A library of CSP solver using monad:
 https://hackage.haskell.org/package/csp
 
-***External references***
-
-A library of CSP solver using monad:
-https://hackage.haskell.org/package/csp
-
-
 
 
 
