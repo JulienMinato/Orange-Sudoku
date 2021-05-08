@@ -57,10 +57,12 @@ The sudoku problem can be generalized into CSP wherein the values in the cell co
 
 - Solutions
     - Using Monad:
+    
       https://hackage.haskell.org/package/csp
       http://overtond.blogspot.com/2008/07/pre.html
       https://github.com/abarbu/csp-haskell
     - Others:
+    
       - one possible solution on page 5:
         https://www.cs.tufts.edu/~nr/cs257/archive/andrew-tolmach/modular_lazy_search_jfp.pdf
       - dcfl
