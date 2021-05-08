@@ -49,12 +49,29 @@ The sudoku problem can be generalized into CSP wherein the values in the cell co
 
 ***External references***
 
-A library of CSP solver using monad:
-https://hackage.haskell.org/package/csp
+- Constraint Satisfaction Problems 101
+  https://en.wikipedia.org/wiki/Constraint_satisfaction_problem
+  https://www.cpp.edu/~ftang/courses/CS420/notes/CSP.pdf
+  https://www.slideshare.net/davidoverton/constraint-programming-in-haskell?from_action=save
+
+- Solutions
+    - Using Monad:
+      https://hackage.haskell.org/package/csp
+      http://overtond.blogspot.com/2008/07/pre.html
+      https://github.com/abarbu/csp-haskell
+    - Others:
+     - one possible solution on page 5:
+       https://www.cs.tufts.edu/~nr/cs257/archive/andrew-tolmach/modular_lazy_search_jfp.pdf
+     - dcfl
+       http://poincare.github.io/DCFL/
+     - Eric
+       https://github.com/walkie/CSP-Solver/blob/master/CSP.hs
 
 
-test!!!
-Happy!
+
+
+
+
 
 
 
