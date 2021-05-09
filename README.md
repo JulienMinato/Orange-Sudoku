@@ -42,3 +42,57 @@ Square:: [[Cell]]
 A square is a 3*3 Digits list. For a 9*9 sudoku, there are 9 squares. 
 
 The sudoku problem can be generalized into CSP wherein the values in the cell correspond to values of the variables. The domain is the scope of the variable which ranges across all digits between 1 and 9 for any variable initially (except for the variables that have already been assigned). The constraints for the sudoku problem is that the variables in all rows and columns are different from each other and the variables inside the square also need to be different.
+
+
+
+
+*************************
+***External References***
+*************************
+
+- Constraint Satisfaction Problems 101
+
+  https://en.wikipedia.org/wiki/Constraint_satisfaction_problem
+  
+  https://www.cpp.edu/~ftang/courses/CS420/notes/CSP.pdf
+  
+  https://www.slideshare.net/davidoverton/constraint-programming-in-haskell?from_action=save
+
+- Solutions
+    - Using Monad:
+    
+      https://hackage.haskell.org/package/csp
+      
+      http://overtond.blogspot.com/2008/07/pre.html
+      
+      https://github.com/abarbu/csp-haskell
+      
+    - Others:
+    
+      - one possible solution on page 5
+      
+        https://www.cs.tufts.edu/~nr/cs257/archive/andrew-tolmach/modular_lazy_search_jfp.pdf
+        
+      - dcfl
+        http://poincare.github.io/DCFL/
+        
+      - Eric
+        https://github.com/walkie/CSP-Solver/blob/master/CSP.hs
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

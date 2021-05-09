@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 --Constraint Satisfaction Problems
 --Binary CSPs
 -- A binary constraint satisfaction problem is described by
@@ -23,6 +24,11 @@
 --  A solution to a CSP is any complete consistent state.
 
 
+=======
+-- I am here!!!
+
+-- | A small and simple CSP solver.
+>>>>>>> 02bc9e708045bb7b97d2f4883c391144c8c6447d
 module CSP where
 
 
