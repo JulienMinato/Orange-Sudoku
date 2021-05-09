@@ -1,112 +1,97 @@
--- | A small and simple CSP solver.
+--Constraint Satisfaction Problems
+--Binary CSPs
+-- A binary constraint satisfaction problem is described by
+-- • a set of variables V = {v1, v2,...,vm};
+-- • for each variable vi, a finite set Di of possible values (its domain); and
+-- • for each pair of distinct variables vi and vj, i<j, a binary relation Rij ⊆
+--    Di × Dj, representing a constraint on the values that vi and vj can take on
+--    simultaneously.
+
+-- An assignment vi:=xi associates a variable vi to some value xi ∈ Di. A state is a
+-- set of assignments, with at most one assignment per variable. A state S0 extends
+-- state S if it contains all the assignments of S together with one or more additional
+-- assignments.
+
+-- A pair of assignments vi:=xi and vj:=xj, i<j, satisfies the corresponding constraint Rij if (xi, xj) ∈ Rij. 
+
+-- A state is consistent if every pair of distinct assignments
+
+-- in the state satisfies the corresponding constraint; otherwise it is inconsistent.
+
+-- A state is complete if it assigns all the variables of V; otherwise it is partial. 
+
+--  A solution to a CSP is any complete consistent state.
+
+
 module CSP where
 
-import Data.Function (on)
-import Data.List     (deleteBy,findIndex,intersect,sortBy)
+
+type Var = Int
+type Value = Int
+
+data Assignment = Var := Value
+
+var :: Assignment -> Var
+var (var := _) = var
+
+value :: Assignment -> Value
+value (_ := val) = val
+
+type Relation = Assignment -> Assignment -> Bool
+
+data CSP = CSP {vars, vals :: Int, rel :: Relation}
+
+data State = State ([Assignment],[Var])
+
+assignments :: State -> [Assignment]
+assignments (State(as,_)) = as
+
+unassigned :: State -> [Var]
+unassigned (State(_,us)) = us
+
+emptyState :: CSP -> State
+emptyState CSP{vars=vars} = State([],[1..vars])
+
+isEmptyState :: State -> Bool
+isEmptyState = null . assignments
+
+extensions :: CSP -> State -> [State]
+extensions CSP{vals=vals} (State(as,nextvar:rest)) =
+[State((nextvar := val):as,rest) | val <- [1..vals]]
+extensions _ (State(_,[])) = []
+
+newNextVar :: State -> Var -> State
+newNextVar s@(State(as,[])) _ = s
+newNextVar (State(as,us)) next = State(as,next:delete next us)
 
 
--- * Variables
-
--- | A variable has a name and a list of possible values (its domain).
-type Variable n a = (n,[a])
-
--- | The name of a variable.
-name :: Variable n a -> n
-name = fst
-
--- | The domain of possible values of a variable.
-domain :: Variable n a -> [a]
-domain = snd
-
--- | A variable's order is the length of its domain.
-order :: Variable n a -> Int
-order = length . domain
-
--- | 'True' if the variables have the same name.
-sameName :: Eq n => Variable n a -> Variable n a -> Bool
-sameName = (==) `on` name
-
--- | Is the variable undefined?
---   'True' if its domain is empty.
-undef :: Variable n a -> Bool
-undef = null . domain
-
--- | Is the variable defined?
---   'True' if its domain is non-empty.
-def :: Variable n a -> Bool
-def = not . undef
-
--- | Is the variable assigned?
---   'True' if its domain contains exactly one element.
-assigned :: Variable n a -> Bool
-assigned = (==1) . order
-
--- | Is the variable unassigned?
---   'True' if it is not assigned.
-unassigned :: Variable n a -> Bool
-unassigned = not . assigned
-
--- | Sort a list of variables by order,
---   from most constrained (smallest order) to least.
-triage :: [Variable n a] -> [Variable n a]
-triage = sortBy (compare `on` order)
+complete :: State -> Bool
+complete = null . unassigned
 
 
--- * Constraints
-
--- | A constraint is a function from a list of variables
---   to a boolean value indicating whether the constraint is satisfied.
-type Constraint n a = [Variable n a] -> Bool
-
--- | A constraint between two variables, given by name.
-byName2 :: Eq n => n -> n -> ([a] -> [a] -> Bool) -> Constraint n a
-byName2 a b f vs | Just da <- lookup a vs,
-                   Just db <- lookup b vs = f da db
-                 | otherwise = error "Bad variable name."
-
--- | An example constraint, indicating that two variables should be equal.
-eq :: (Eq n, Eq a) => n -> n -> Constraint n a
-eq a b = byName2 a b f
-  where f da db = (not . null) (da `intersect` db)
-
--- | Given a binary predicate, construct a constraint that it is pairwise
---   satisfied for all variables.
-pairwise :: (Variable n a -> Variable n a -> Bool) -> Constraint n a
-pairwise f []     = True
-pairwise f (v:vs) = all (f v) vs && pairwise f vs
+lastAssignment :: State -> Assignment
+lastAssignment = head . assignments
 
 
--- * Solver
+nextVar :: State -> Var
+nextVar = head . unassigned
 
--- | Is the problem consistent?
---   'True' if all constraints are satisfied.
-check :: [Constraint n a] -> [Variable n a] -> Bool
-check cs vs = all ($ vs) cs
 
--- | Is the problem solved?
---   'True' if all constraints are satisfied and if all variables are assigned.
-solved :: [Constraint n a] -> [Variable n a] -> Bool
-solved cs vs = all assigned vs && check cs vs
+generate :: CSP -> [State]
+generate csp@CSP{vars=vars} = g vars
+whereg0= [emptyState csp]
+g var = concat [extensions csp st | st <- g (var-1)]
 
--- | Solve a CSP problem.
---   Returns all solutions for given a list of constraints and variables.
-solve :: Eq n => [Constraint n a] -> [Variable n a] -> [[Variable n a]]
-solve cs vs | any undef pre = []
-            | Nothing <- next = [pre]
-            | Just i  <- next = let (av,(n,d):uv) = splitAt i pre
-                                in concat [solve cs ((n,[a]):av ++ uv) | a <- d]
-  where pre  = triage (prune cs vs)
-        next = findIndex unassigned pre
+inconsistencies :: CSP -> State -> [(Var, Var)]
+inconsistencies CSP{rel=rel} st =
+[ (var a, var b) | a <- as, b <- as, var a > var b, not (rel a b) ]
+          where as = assignments st
 
--- | Solve a CSP problem and return the first solution, if any.
-solve1 :: Eq n => [Constraint n a] -> [Variable n a] -> Maybe [Variable n a]
-solve1 cs vs | (s:_) <- solve cs vs = Just s
-             | otherwise            = Nothing
+consistent :: CSP -> State -> Bool
+consistent csp = null . (inconsistencies csp)
 
--- | Prune the search space by removing from the domain of each variable any
---   value which would immediately violate a constraint.
-prune :: Eq n => [Constraint n a] -> [Variable n a] -> [Variable n a]
-prune cs vs = foldl f vs vs
-  where f vs v@(n,d) = let vs' = deleteBy sameName v vs
-                       in (n, [a | a <- d, check cs ((n, [a]) : vs')]) : vs'
+test :: CSP -> [State] -> [State]
+test csp = filter (consistent csp)
 
+solver :: CSP -> [State]
+solver csp = test csp candidates where candidates = generate csp
