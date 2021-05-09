@@ -100,4 +100,5 @@ test :: CSP -> [State] -> [State]
 test csp = filter (consistent csp)
 
 solver :: CSP -> [State]
-solver csp = test csp candidates where candidates = generate csp
+solver csp = test csp candidates 
+    where candidates = generate csp
