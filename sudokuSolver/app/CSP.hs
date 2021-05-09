@@ -27,10 +27,13 @@
 
 module CSP where
 
+import Data.List
 
 type Var = Int
 type Value = Int
 
+
+-- A pair of assignments vi:=xi and vj:=xj, i<j, satisfies the corresponding constraint Rij if (xi, xj) ∈ Rij. 
 data Assignment = Var := Value
 
 var :: Assignment -> Var
@@ -58,9 +61,9 @@ isEmptyState :: State -> Bool
 isEmptyState = null . assignments
 
 extensions :: CSP -> State -> [State]
-extensions CSP{vals=vals} (State(as,nextvar:rest)) =
-[State((nextvar := val):as,rest) | val <- [1..vals]]
+extensions CSP{vals=vals} (State(as,nextvar:rest)) = [State((nextvar := val):as,rest) | val <- [1..vals]]
 extensions _ (State(_,[])) = []
+
 
 
 newNextVar :: State -> Var -> State
@@ -82,12 +85,12 @@ nextVar = head . unassigned
 
 generate :: CSP -> [State]
 generate csp@CSP{vars=vars} = g vars
-whereg0= [emptyState csp]
-g var = concat [extensions csp st | st <- g (var-1)]
+  where g 0 = [emptyState csp]
+        g var = concat [extensions csp st | st <- g (var-1)]
+
 
 inconsistencies :: CSP -> State -> [(Var, Var)]
-inconsistencies CSP{rel=rel} st =
-[ (var a, var b) | a <- as, b <- as, var a > var b, not (rel a b) ]
+inconsistencies CSP{rel=rel} st = [(var a, var b) | a <- as, b <- as, var a > var b, not (rel a b)]
           where as = assignments st
 
 
@@ -100,3 +103,14 @@ test csp = filter (consistent csp)
 solver :: CSP -> [State]
 solver csp = test csp candidates 
     where candidates = generate csp
+
+
+
+queens :: Int -> CSP
+queens n = CSP{vals=n,vars=n,rel=safe}
+  where safe (col1 := row1) (col2 := row2) = (row1 /= row2) && abs (col1 - col2) /= abs (row1 - row2)
+
+
+graphcoloring :: Int -> ((Var,Var) -> Bool) -> Int -> CSP
+graphcoloring nodes adj colors = CSP{vars=nodes,vals=colors,rel=ok}
+        where ok (n1 := c1) (n2 := c2) = c1 /= c2 || not (adj (n1,n2))
