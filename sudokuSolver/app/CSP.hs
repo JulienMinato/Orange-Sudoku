@@ -1,3 +1,5 @@
+-- From https://www-proquest-com.ezproxy.proxy.library.oregonstate.edu/docview/926288615/E86931B8711A4F79PQ/1?accountid=13013
+
 --Constraint Satisfaction Problems
 --Binary CSPs
 -- A binary constraint satisfaction problem is described by
