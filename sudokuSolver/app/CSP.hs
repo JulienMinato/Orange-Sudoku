@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 --Constraint Satisfaction Problems
 --Binary CSPs
 -- A binary constraint satisfaction problem is described by
@@ -24,11 +23,6 @@
 --  A solution to a CSP is any complete consistent state.
 
 
-=======
--- I am here!!!
-
--- | A small and simple CSP solver.
->>>>>>> 02bc9e708045bb7b97d2f4883c391144c8c6447d
 module CSP where
 
 
@@ -66,6 +60,7 @@ extensions CSP{vals=vals} (State(as,nextvar:rest)) =
 [State((nextvar := val):as,rest) | val <- [1..vals]]
 extensions _ (State(_,[])) = []
 
+
 newNextVar :: State -> Var -> State
 newNextVar s@(State(as,[])) _ = s
 newNextVar (State(as,us)) next = State(as,next:delete next us)
@@ -92,6 +87,7 @@ inconsistencies :: CSP -> State -> [(Var, Var)]
 inconsistencies CSP{rel=rel} st =
 [ (var a, var b) | a <- as, b <- as, var a > var b, not (rel a b) ]
           where as = assignments st
+
 
 consistent :: CSP -> State -> Bool
 consistent csp = null . (inconsistencies csp)
