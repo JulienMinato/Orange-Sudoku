@@ -46,8 +46,14 @@ type Relation = Assignment -> Assignment -> Bool
 
 data CSP = CSP {vars, vals :: Int, rel :: Relation}
 
+-- A state is consistent if every pair of distinct assignments
 data State = State ([Assignment],[Var])
 
+
+-- An assignment vi:=xi associates a variable vi to some value xi ∈ Di. A state is a
+-- set of assignments, with at most one assignment per variable. A state S0 extends
+-- state S if it contains all the assignments of S together with one or more additional
+-- assignments.
 assignments :: State -> [Assignment]
 assignments (State(as,_)) = as
 
@@ -71,6 +77,7 @@ newNextVar s@(State(as,[])) _ = s
 newNextVar (State(as,us)) next = State(as,next:delete next us)
 
 
+-- A state is complete if it assigns all the variables of V; otherwise it is partial. 
 complete :: State -> Bool
 complete = null . unassigned
 
