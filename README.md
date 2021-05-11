@@ -1,49 +1,39 @@
-# Orange-Sudoku
+# Solver :: CSP a -> Sudoku a -> :) 
+
 Solving Every Sudoku Puzzle. 
 
-Why did we do this? As computer security expert Ben Laurie has stated, Sudoku is "a denial of service attack on human intellect". Many people we know were infected by the virus, and we thought maybe this would demonstrate that they didn't need to spend any more time on Sudoku. You may see a lot of Sudoku behind magazines or newspapers such as the Baro. Don’t you ever want to get rewards? Now you have a chance. Let us help you solve the obstinate Sudoku. And perhaps along the way we can learn Haskell, type design, and algorithm analysis.
+As computer security expert Ben Laurie has stated, Sudoku is "a denial of service attack on human intellect". Many people we know were infected by the virus, and we thought maybe this would demonstrate that they didn't need to spend any more time on Sudoku. You may see a lot of Sudoku behind magazines or newspapers such as the Baro. Don’t you ever want to get rewards? Now you have a chance. Let us help you solve the obstinate Sudoku with our stable class libraries. And perhaps along the way we can learn Haskell, type design, and algorithm analysis.
 
-One of the most famous solutions is Norvig’s sudoku solver which also implemented in different languages such as C++, Java, Ruby and Haskell, Norvig’s approach includes two crucial ideas: constraint propagation and search, In the Haskell version, the author offers a pretty straightforward implementation by using modules such as Data.list, Data.Map and Control.Monad, we can do some refactoring by taking this articles as reference.
-Peter Norvig's constraint propagation algorithm is learned and adopted by many people to solve Sudoku problems. And Emmanuel Delaborde's Haskell version is truly beautiful. Maybe Grid's abstraction is very clever, foldM is used concisely. Our plan is generating an algorithm to solve other constraint satisfaction problems such as tic-tac-toe.
 
-https://hackage.haskell.org/package/csp-1.4.0/docs/Control-Monad-CSP.html#v:solveCSP
+Our project is to implement a CSP solver called puzzle killer, aiming to help artificial intelligence researchers solve CSPs through efficient and reliable algorithms and stable libraries. And for the people who are interested in puzzle games such as Sudoku, N-Queens, this tool can also provide them corresponding solutions quickly and painlessly.
 
-http://www.cs.yale.edu/homes/piskac/papers/2019HallahanETALquasiquoter.pdf
+
+The CSP contains n variables and x1,x2,...,xn that need to be evaluated and n domains d1,d2,...,dn such each domain could contain b possible values for each variable xi. CSP also has e constraints c1,c2,...,cewherein each constraint limits the values taken by one or more variables. The objective of this CSP problem is to come up with values of these variables such that all the constraints are satisfied. Generalized constraint satisfaction problem solver (CSP solver) can have multiple applications. In this case CSP will be used as the Sudoku Solver and provide a solution to the famous N-Queens problem.
 
 ### How to run
 
 Install Cable
 https://cabal.readthedocs.io/en/3.4/index.html
 
-cabal run :sudokuSolver
+cabal run :all 
 
-### important objects
+### Milestone #1
 
-Below are important objects that will be represented in our project:
+### Project goal description and current progress:
 
-Cell:: Int | Maybe(Int)
+Our major goal is the implementation for solving constraint satisfaction problems, which can help artificial intelligence researchers solve CSPs through efficient and reliable algorithms and stable libraries. People who are interested in puzzle games such as Sudoku, N-Queens, can also use this tool to obtain corresponding solutions quickly and painlessly. 
 
-There are 2 cases for the content of a cell, it could either be a given digit, which is fixed, or a possible digit.
+Currently, we are trying to describe the CSP by defining variables, domain and constraint relation etc, then maybe implement a naive solver next step???
 
+### Design questions for workshop discussion:
 
-Row:: [Cell]
+For now our first version didn’t use monad (describe what’s included inside the code), will it be better or worse if we use monad?
 
-A row is a list of cells. For a 9*9 Sudoku puzzles, there would be 9 cells in a row.
+Is it better to use higher order functions for defining computations?
 
+Is it advisable to use lazy data structure for storing intermediate values to reduce computation cost?
 
-
-Col:: [Cell]
-
-This is basically the same idea as Row, the only difference is the cells are lined up in a vertical way in the puzzle.
-
-
-Square:: [[Cell]]
-
-A square is a 3*3 Digits list. For a 9*9 sudoku, there are 9 squares. 
-
-The sudoku problem can be generalized into CSP wherein the values in the cell correspond to values of the variables. The domain is the scope of the variable which ranges across all digits between 1 and 9 for any variable initially (except for the variables that have already been assigned). The constraints for the sudoku problem is that the variables in all rows and columns are different from each other and the variables inside the square also need to be different.
-
-
+Is it better to use modular structure to separate generation and testing the potential candidate solutions? 
 
 
 *************************
