@@ -38,25 +38,27 @@ type Value = Int
 data Assignment = Var := Value
   deriving (Eq,Show)
 
+type Relation = Assignment -> Assignment -> Bool
+
+data CSP = CSP {vars, vals :: Int, rel :: Relation}
+
+-- A state is consistent if every pair of distinct assignments
+data State = State ([Assignment],[Var])
+  deriving (Eq,Show)
+
 var :: Assignment -> Var
 var (var := _) = var
 
 value :: Assignment -> Value
 value (_ := val) = val
 
-type Relation = Assignment -> Assignment -> Bool
 
-data CSP = CSP {vars, vals :: Int, rel :: Relation}
-
-
--- A state is consistent if every pair of distinct assignments
-data State = State ([Assignment],[Var])
-  deriving (Eq,Show)
 
 -- An assignment vi:=xi associates a variable vi to some value xi ∈ Di. A state is a
 -- set of assignments, with at most one assignment per variable. A state S0 extends
 -- state S if it contains all the assignments of S together with one or more additional
 -- assignments.
+
 assignments :: State -> [Assignment]
 assignments (State(as,_)) = as
 
@@ -68,6 +70,7 @@ emptyState CSP{vars=vars} = State([],[1..vars])
 
 isEmptyState :: State -> Bool
 isEmptyState = null . assignments
+
 
 extensions :: CSP -> State -> [State]
 extensions CSP{vals=vals} (State(as,nextvar:rest)) = [State((nextvar := val):as,rest) | val <- [1..vals]]
@@ -91,6 +94,10 @@ lastAssignment = head . assignments
 
 nextVar :: State -> Var
 nextVar = head . unassigned
+
+
+
+
 
 
 generate :: CSP -> [State]
@@ -117,9 +124,8 @@ solver csp = test csp candidates
     where candidates = generate csp
 
 
-queens :: Int -> CSP
-queens n = CSP{vals=n,vars=n,rel=safe}
-  where safe (col1 := row1) (col2 := row2) = (row1 /= row2) && abs (col1 - col2) /= abs (row1 - row2)
+
+
 
 
 graphcoloring :: Int -> ((Var,Var) -> Bool) -> Int -> CSP
