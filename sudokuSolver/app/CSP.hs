@@ -28,6 +28,7 @@ type Value = Int
 --(:=) is actually a constructor. It builds up a datatype. 
 -- We can't know what data type it constructs without knowing
 --  Read it as "translates to" or "is isomorphic to".
+
 data Assignment = Var := Value
   deriving (Eq,Show)
 
@@ -121,6 +122,7 @@ test :: CSP -> [State] -> [State]
 test csp = filter (consistent csp)
 
 
+----A solution of a CSP is a total assignation which satisfied all the constraints of the problem.
 --A solution to a CSP is any complete consistent state
 --the solver returns a list of all solutions if demanded, 
 --it can be used to obtain just the first solution
