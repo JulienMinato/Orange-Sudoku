@@ -70,11 +70,7 @@ Is it better to use modular structure to separate generation and testing the pot
         https://github.com/walkie/CSP-Solver/blob/master/CSP.hs
 
 
-
-
-
-
-
+NORDIN, T., & TOLMACH, A. (2001). Modular lazy search for constraint satisfaction problems. Journal of Functional Programming, 11(5), 557-587. Retrieved from http://proxy.library.oregonstate.edu.ezproxy.proxy.library.oregonstate.edu/login?url=https://www-proquest-com.ezproxy.proxy.library.oregonstate.edu/scholarly-journals/modular-lazy-search-constraint-satisfaction/docview/213461142/se-2?accountid=13013
 
 
 
