@@ -5,6 +5,7 @@ import Control.Exception
 import System.Environment
 import Data.Maybe
 
+--input Int 
 getNum :: (Read a, Num a, Show a) => IO a
 getNum = readLn
 
