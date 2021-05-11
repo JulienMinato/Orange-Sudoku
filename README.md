@@ -15,7 +15,7 @@ The CSP contains n variables and x1,x2,...,xn that need to be evaluated and n do
 Install Cable
 https://cabal.readthedocs.io/en/3.4/index.html
 
-cabal run :sudokuSolver
+cabal run :all 
 
 ### Milestone #1
 
