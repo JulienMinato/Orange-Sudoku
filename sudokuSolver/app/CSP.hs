@@ -30,7 +30,6 @@ type Value = Int
 --  Read it as "translates to" or "is isomorphic to".
 
 data Assignment = Var := Value
-  deriving (Eq,Show)
 
 --True for taking two assignments if the assignments obey the relevant constraint. 
 type Relation = Assignment -> Assignment -> Bool
