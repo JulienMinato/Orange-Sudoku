@@ -27,6 +27,7 @@
 
 module CSP where
 
+import Data.Function
 import Data.List
 
 type Var = Int
@@ -35,6 +36,7 @@ type Value = Int
 
 -- A pair of assignments vi:=xi and vj:=xj, i<j, satisfies the corresponding constraint Rij if (xi, xj) ∈ Rij. 
 data Assignment = Var := Value
+  deriving (Eq,Show)
 
 var :: Assignment -> Var
 var (var := _) = var
@@ -46,9 +48,10 @@ type Relation = Assignment -> Assignment -> Bool
 
 data CSP = CSP {vars, vals :: Int, rel :: Relation}
 
+
 -- A state is consistent if every pair of distinct assignments
 data State = State ([Assignment],[Var])
-
+  deriving (Eq,Show)
 
 -- An assignment vi:=xi associates a variable vi to some value xi ∈ Di. A state is a
 -- set of assignments, with at most one assignment per variable. A state S0 extends
@@ -104,13 +107,14 @@ inconsistencies CSP{rel=rel} st = [(var a, var b) | a <- as, b <- as, var a > va
 consistent :: CSP -> State -> Bool
 consistent csp = null . (inconsistencies csp)
 
+
 test :: CSP -> [State] -> [State]
 test csp = filter (consistent csp)
+
 
 solver :: CSP -> [State]
 solver csp = test csp candidates 
     where candidates = generate csp
-
 
 
 queens :: Int -> CSP
