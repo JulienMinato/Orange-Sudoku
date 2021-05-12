@@ -18,6 +18,7 @@ import Data.List
 
 
 
+
 -- A set of variables V
 type Var = Int
 
