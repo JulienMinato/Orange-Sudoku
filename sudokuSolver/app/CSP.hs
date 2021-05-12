@@ -30,7 +30,7 @@ type Value = Int
 --  Read it as "translates to" or "is isomorphic to".
 
 data Assignment = Var := Value
-
+  deriving (Eq,Show)
 --True for taking two assignments if the assignments obey the relevant constraint. 
 type Relation = Assignment -> Assignment -> Bool
 
@@ -42,8 +42,15 @@ data State = State ([Assignment],[Var])
 --the size of domain, vals, 
 --and a constraint relation, rel
 data CSP = CSP {vars, vals :: Int, rel :: Relation}
+--   deriving (Eq,Show)
+
+-- instance Show CSP where
+--   show (CSP...)=...
 
 
+-- putStrLn ...
+-- instance Show CSP where
+--    show (CSP ...) = ...
 --  All domains have the same size n and that their values are represented by integers in the set {1, 2, . . . , n}; 
 --  these limitations could be trivially removed.
 
