@@ -17,6 +17,7 @@ main = do
     
     i <- readFile "/Users/liang/Projects/GitHub/Orange-Sudoku/sudokuSolver/app/sudoku.txt" 
     prettyprint . lines $ i
+    --load [1..9] i 
     -- putStrLn "N queens puzzle: how many queens?"
     -- n <- getNum               
     -- print (solver (queens n))
