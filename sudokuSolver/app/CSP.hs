@@ -1,7 +1,7 @@
 module CSP where
 
 import Data.List
-
+--import Text.Regex.TDFA
 
 --The Definition comes from
 -- NORDIN, T., & TOLMACH, A. (2001). Modular lazy search for constraint satisfaction problems. 
@@ -22,6 +22,7 @@ import Data.List
 -- A set of variables V
 type Var = Int
 
+
 --its domain: for each variable vi, a finite set of possible values 
 type Value = Int
 
@@ -33,11 +34,15 @@ type Value = Int
 data Assignment = Var := Value
   deriving (Eq,Show)
 --True for taking two assignments if the assignments obey the relevant constraint. 
+
 type Relation = Assignment -> Assignment -> Bool
 
 -- A state is a set of assignments and consistent if every pair of distinct assignments
 data State = State ([Assignment],[Var])
   deriving (Eq,Show)
+
+-- instance Show State where
+--   show (state )
 
 --A CSP is modeled record containing the number of variables, vars, 
 --the size of domain, vals, 
@@ -60,6 +65,7 @@ var (var := _) = var
 
 value :: Assignment -> Value
 value (_ := val) = val
+
 
 
 -- A pair of assignments vi:=xi and vj:=xj, i<j, satisfies the corresponding constraint Rij if (xi, xj) ∈ Rij. 

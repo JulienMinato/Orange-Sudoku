@@ -15,3 +15,4 @@ main = do
     putStrLn "N queens puzzle: how many queens?"
     n <- getNum               
     print (solver (queens n))
+    --writeFile "NQueens.txt" (show solver (queens n))
