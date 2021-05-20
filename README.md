@@ -10,30 +10,44 @@ Our project is to implement a CSP solver called puzzle killer, aiming to help ar
 
 The CSP contains n variables and x1,x2,...,xn that need to be evaluated and n domains d1,d2,...,dn such each domain could contain b possible values for each variable xi. CSP also has e constraints c1,c2,...,cewherein each constraint limits the values taken by one or more variables. The objective of this CSP problem is to come up with values of these variables such that all the constraints are satisfied. Generalized constraint satisfaction problem solver (CSP solver) can have multiple applications. In this case CSP will be used as the Sudoku Solver and provide a solution to the famous N-Queens problem.
 
-### How to run
-
-Install Cable
-https://cabal.readthedocs.io/en/3.4/index.html
-
-cabal run :all 
-
+***********************
 ### Milestone #1
+***********************
 
-### Project goal description and current progress:
+- Project goal description and current progress:
 
-Our major goal is the implementation for solving constraint satisfaction problems, which can help artificial intelligence researchers solve CSPs through efficient and reliable algorithms and stable libraries. People who are interested in puzzle games such as Sudoku, N-Queens, can also use this tool to obtain corresponding solutions quickly and painlessly. 
+  Our final goal of this project is the implementation for solving constraint satisfaction problems. People who are interested in puzzle games related to CSPs such as Sudoku, N-Queens, can also use this tool for obtaining quick results.
+ 
+- Current progress and challenges:
 
-Currently, we are trying to describe the CSP by defining variables, domain and constraint relation etc, then maybe implement a naive solver next step???
+  For now, we are trying to describe the CSP by defining variables, domain and constraint relation etc. The Var represents the variables and value is the domain for these variables. Both of them are defined. The emptyState is defined and the function isEmptyState checks whether the State is empty. The assignments keep track of the assigned state of variables. The constraints are defined in the CSP. The solver generates a set of solutions using generate and pruned using the test function. The data types and methods are defined. Presently the issue that is encountered is the display pattern for NQueens is not aligned appropriately. The implementation for Sudoku solver will be completed in Milestone 2. 
+  
+  We encountered the problem of imperfect printing of CSP results. For now we just print out the result as a list of states since the definition of Assignment using "or" which is convenient for us to deal with unfinished assignments. But this makes implementing the printing function a little challenging. To solve this  problem, We tried to use regular expressions and showing the interface to deal with these highly messy strings but it didn't work as we expected.
 
-### Design questions for workshop discussion:
 
-For now our first version didn’t use monad (describe what’s included inside the code), will it be better or worse if we use monad?
+- How to run our project:
 
-Is it better to use higher order functions for defining computations?
+  Step 1: Install Cabal from https://www.haskell.org/cabal/
 
-Is it advisable to use lazy data structure for storing intermediate values to reduce computation cost?
+  Step 2: Open terminal and cd to the folder: /Orange-Sudoku/sudokuSolver
 
-Is it better to use modular structure to separate generation and testing the potential candidate solutions? 
+  Step 3: Run the command ‘ $ cabal run ’
+
+  Step 4: Enter a number for the question: "N queens puzzle: how many queens?" and you will have all the answers!
+  
+
+- Design questions for workshop discussion:
+
+  - For now our first version didn’t use monad (describe what’s included inside the code), will it be better or worse if we use monad?
+
+  - Is it better to use higher order functions for defining constraints?
+
+  - Is it advisable to use lazy data structure for storing intermediate values to reduce computation cost?
+
+  - Is it better to use modular structure to separate generation and testing the potential candidate solutions? 
+ 
+  - How are we going to present the results of N-Queens and Sudoku?
+
 
 
 *************************
