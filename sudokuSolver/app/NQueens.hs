@@ -19,19 +19,19 @@ queens n = CSP{vals=n,vars=n,rel=safe}
 nQueenPrint :: [State] -> String
 nQueenPrint [] = ""
 nQueenPrint (x:xs) = let State(a,_) = x
-                     in assignPrint a (length a) ++ "\n" ++ nQueenPrint xs
-
+                     in assignPrint a (length a) ++ "\n" ++ "\n" ++ nQueenPrint xs
+                          --show '\n
 assignPrint :: [Assignment] -> Int -> String
 assignPrint []     _ = ""
 assignPrint (x:xs) n = let _ := b = x
-                       in helper 1 b n ++ " " ++ assignPrint xs n
+                       in helper 1 b n ++ "\n" ++ assignPrint xs n
 
 helper :: Int -> Int -> Int -> String
 helper c x n = if c == x
-               then 'o':(helper (c+1) x n)
+               then 'Q':(helper (c+1) x n)
                else if c > n
                     then " "
-                    else 'x':(helper (c+1) x n)
+                    else '.':(helper (c+1) x n)
 
 --prettyprintNQueens :: CSP -> [Int, Int]
 --prettyprintNQueens _ = [] 

@@ -25,7 +25,6 @@ sudokuTest=[[0,0,0,0,0,0,9,0,7],
             [5,0,7,0,0,0,0,0,0]]
 
 
-
 type Nat      = Int 
 type Pos      = (Nat,Nat)
 -- type Sudoku a = Puzzle (Maybe a) Pos

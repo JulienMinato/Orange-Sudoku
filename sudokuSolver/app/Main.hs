@@ -21,5 +21,6 @@ main = do
     putStrLn "N queens puzzle: how many queens?"
     n <- getNum    
 
-    putStr(nQueenPrint (solver (queens n)))           
+    putStr(nQueenPrint (solver (queens n)))        
+    --print(nQueenPrint (solver (queens n)))      
     -- print (solver (queens n))
