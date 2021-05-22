@@ -28,10 +28,11 @@ sudokuTest=[[0,0,0,0,0,0,9,0,7],
 
 type Nat      = Int 
 type Pos      = (Nat,Nat)
-
+-- type Sudoku a = Puzzle (Maybe a) Pos
+-- type Puzzle a b = [(b, a)]
 
 -- |load from an input file as type of String and Change it to a Sudoku problem
--- load :: [Int] -> String -> Sudoku 
+-- load :: [Int] -> String -> Sudoku Int 
 -- load xs s = do
 --              (line,s1)   <- zip xs $ lines s
 --              (column,c1) <- zip xs s1 

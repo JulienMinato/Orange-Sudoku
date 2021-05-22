@@ -15,9 +15,11 @@ getNum = readLn
 main :: IO ()
 main = do
     
-    i <- readFile "/Users/liang/Projects/GitHub/Orange-Sudoku/sudokuSolver/app/sudoku.txt" 
-    prettyprint . lines $ i
+    --i <- readFile "/Users/liang/Projects/GitHub/Orange-Sudoku/sudokuSolver/app/sudoku.txt" 
+    --prettyprint . lines $ i
     --load [1..9] i 
-    -- putStrLn "N queens puzzle: how many queens?"
-    -- n <- getNum               
+    putStrLn "N queens puzzle: how many queens?"
+    n <- getNum    
+    
+    print(nQueenPrint (solver (queens n)))           
     -- print (solver (queens n))
