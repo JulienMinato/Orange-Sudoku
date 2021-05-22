@@ -19,7 +19,7 @@ queens n = CSP{vals=n,vars=n,rel=safe}
 nQueenPrint :: [State] -> String
 nQueenPrint [] = ""
 nQueenPrint (x:xs) = let State(a,_) = x
-                     in assignPrint a (length a) ++ (show '\n') ++ nQueenPrint xs
+                     in assignPrint a (length a) ++ "\n" ++ nQueenPrint xs
 
 assignPrint :: [Assignment] -> Int -> String
 assignPrint []     _ = ""

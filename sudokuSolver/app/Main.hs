@@ -20,6 +20,6 @@ main = do
     --load [1..9] i 
     putStrLn "N queens puzzle: how many queens?"
     n <- getNum    
-    
-    print(nQueenPrint (solver (queens n)))           
+
+    putStr(nQueenPrint (solver (queens n)))           
     -- print (solver (queens n))
