@@ -1,16 +1,19 @@
 -- | Example: Sudoku solver Problem
 module Sudoku where
 
+import CSP
 
 import Data.Char
 import Control.Monad
 import Control.Applicative 
 
+import Data.Maybe (maybeToList)
+import Data.List (delete)
+
 --The sudoku solver problem looks 
 --The domain is the scope of the variable which ranges across all digits between 1 and 9 
 --for any variable initially (except for the variables that have already been assigned). 
 --All possibilities can be evaluated and pruned based on the constraints. 
-
 
 
 
@@ -25,29 +28,59 @@ sudokuTest=[[0,0,0,0,0,0,9,0,7],
             [5,0,7,0,0,0,0,0,0]]
 
 
-type Nat      = Int 
-type Pos      = (Nat,Nat)
--- type Sudoku a = Puzzle (Maybe a) Pos
--- type Puzzle a b = [(b, a)]
 
--- |load from an input file as type of String and Change it to a Sudoku problem
--- load :: [Int] -> String -> Sudoku Int 
--- load xs s = do
---              (line,s1)   <- zip xs $ lines s
---              (column,c1) <- zip xs s1 
---              case c1 of 
---                 '.' -> return ((line,column), Nothing)
---                 c   -> let i = digitToInt c in return ((line,column),Just i)
+type PuzzleValue = Int
+type Cell = (Int, Int) -- One-based coordinates
+
+type Puzzle  = [[Maybe PuzzleValue]]
+type Solution = [[PuzzleValue]]
+
+-- The size of the puzzle.
+sqrtSize :: Int
+sqrtSize = 3
+
+size = sqrtSize * sqrtSize
+
+-- Besides the rows and columns, a Sudoku puzzle contains s blocks
+-- of s cells each, where s = size.
+blocks :: [[Cell]]
+blocks = [[(x + i, y + j) | i <- [1..sqrtSize], j <- [1..sqrtSize]] |
+         x <- [0,sqrtSize..size-sqrtSize],
+         y <- [0,sqrtSize..size-sqrtSize]]
+
+-- The one-based number of the block that a cell is contained in.
+blockNum :: Cell -> Int
+blockNum (row, col) = row - (row - 1) `mod` sqrtSize + (col - 1) `div` sqrtSize
 
 
 
 
+sudoku :: [[Int]] -> CSP
+sudoku = undefined
 
 
---sudokusolver :: [[Int]] -> CSP
 
---prettyprintSudoku ::CSP -> [[Int]]
---prettyprintSudoku _ = [[]]
+
+--Test sudoku
+--putStr solver sudoku sudokuTest
+
+-- Replace one element of a list.
+-- Coordinates are 1-based.
+replace :: Int -> a -> [a] -> [a]
+replace i x (y:ys)
+​| i > 1     = y : replace (i - 1) x ys
+​| otherwise = x : ys
+replace _ _ _ = []
+
+-- Replace one element of a 2-dimensional list.
+-- Coordinates are 1-based.
+replace2 :: Int -> Int -> a -> [[a]] -> [[a]]
+replace2 i j x (y:ys)
+​| i > 1     = y : replace2 (i - 1) j x ys
+​| otherwise = replace j x y : ys
+replace2 _ _ _ _ = []
+
+
 
 
 prettyprint :: [String] -> IO ()
