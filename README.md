@@ -27,7 +27,7 @@ The CSP contains n variables and x1,x2,...,xn that need to be evaluated and n do
 
 - How to run our project:
 
-  Step 1: Install Cabal from https://www.haskell.org/cabal/ , run ## cabal install --lib csp
+  Step 1: Install Cabal from https://www.haskell.org/cabal/ , run '$ cabal install --lib csp"
 
   Step 2: Open terminal and cd to the folder: /Orange-Sudoku/sudokuSolver
 
@@ -47,6 +47,12 @@ The CSP contains n variables and x1,x2,...,xn that need to be evaluated and n do
   - Is it better to use modular structure to separate generation and testing the potential candidate solutions? 
  
   - How are we going to present the results of N-Queens and Sudoku?
+
+
+***********************
+### Milestone #2
+***********************
+
 
 
 
