@@ -44,8 +44,6 @@ position (ix,iy) = not (ix /= iy)
 graphcoloringPrint :: [State] -> String
 graphcoloringPrint [] = "No solution"
 
-                    else '*':(helper (c+1) x n)
-
 --graphcoloringTest = 5 [(1,2)-> True, (1,3)-> True, (2,3)->True] 3 
 
 -- 5 place, Wa, Or, Nt, Q, Ny 

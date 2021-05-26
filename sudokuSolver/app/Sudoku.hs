@@ -68,7 +68,7 @@ blockNum (row, col) = row - (row - 1) `mod` sqrtSize + (col - 1) `div` sqrtSize
 sudoku :: [Int] -> CSP
 sudoku puz = CSP{vals=[1..81],vars=9,rel=ok}
 
- where ok (col1 := row1) (col2 := row2) = row1 /= row2 && col1 /= col2
+ where ok (pos1 := row1) (pos2 := row2) = row1 /= row2 && col1 /= col2
 
 --[0,3,4,0,5,9,0,0,0]
 
