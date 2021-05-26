@@ -20,22 +20,26 @@ queensResult = do
 
 sudokuResult :: IO()
 sudokuResult = do
-    putStrLn "Sudoku Question\n"
+    putStrLn "\n\nSudoku Question1\n\n"
     mapM_ print sudokuTest
-    putStrLn "\nThe Solution\n"
+    putStrLn "\n\nSudoku Question2\n\n"
+    mapM_ print sudokuTest2
+    putStrLn "\n\nThe Solution1\n\n"
     --i <- readFile "/Users/liang/Projects/GitHub/Orange-Sudoku/sudokuSolver/app/sudoku.txt" 
     --i <- readFile "/Users/liang/Projects/GitHub/Orange-Sudoku/sudokuSolver/app/data/top95.txt" 
     --i <- readFile "sudoku.txt" 
     --prettyprint . lines $ i
     --load [1..9] i 
     mapM_ print (solveSudoku sudokuTest)
+    putStrLn "\n\nThe Solution2\n\n"
+    mapM_ print (solveSudoku sudokuTest2)
 
 
 graphcolResult :: IO()
 graphcolResult = do 
     putStrLn "an instance of a graph coloring problem (Kempe, 1879)\n"
 
-    print (solver (graphcoloring 5 position 3))
+    mapM_ print (solver (graphcoloring 5 position 3))
 
 testResult :: IO()
 testResult = do

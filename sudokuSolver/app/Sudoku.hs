@@ -31,6 +31,15 @@ sudokuTest=[[0,0,0,0,0,0,9,0,7],
             [0,3,4,0,5,9,0,0,0],
             [5,0,7,0,0,0,0,0,0]]
 
+sudokuTest2 =   [[0,0,3,0,2,0,6,0,0],
+                [9,0,0,3,0,5,0,0,1],
+                [0,0,1,8,0,6,4,0,0],
+                [0,0,8,1,0,2,9,0,0],
+                [7,0,0,0,0,0,0,0,8],
+                [0,0,6,7,0,8,2,0,0],
+                [0,0,2,6,0,9,5,0,0],
+                [8,0,0,2,0,3,0,0,9],
+                [0,0,5,0,1,0,3,0,0]]
 
 
 type PuzzleValue = Int
@@ -79,8 +88,8 @@ load =undefined
 --              (line,s1)   <- zip xs $ lines s
 --              (column,c1) <- zip xs s1 
 --              case c1 of 
---                 '.' -> return [(0:x)]
---                 c   -> let i = digitToInt c in return [(just i :x)]
+--                 '.' -> return [[0]]
+--                 c   -> let i = digitToInt c in return [[just i]]]
 
 --Test sudoku
 --putStr solver sudoku sudokuTest
@@ -106,11 +115,6 @@ solveSudoku puzzle = oneCSPSolution $ do
       where assertRowConstraints =  mapAllPairsM_ (constraint2 (/=))
             assertSquareConstraints dvs i j = 
                 mapAllPairsM_ (constraint2 (/=)) [(dvs !! x) !! y | x <- [i..i+2], y <- [j..j+2]]
-
-
-
-
-
 
 
 
