@@ -66,12 +66,11 @@ blockNum (row, col) = row - (row - 1) `mod` sqrtSize + (col - 1) `div` sqrtSize
 --   where ok (col1 := row1) (col2 := row2) = (row1 /= row2) && abs (col1 - col2) /= abs (row1 - row2)
 
 sudoku :: [Int] -> CSP
-sudoku puz = CSP{vals=2,vars=2,rel=ok}
+sudoku puz = CSP{vals=[1..81],vars=9,rel=ok}
 
  where ok (col1 := row1) (col2 := row2) = row1 /= row2 && col1 /= col2
 
-
-
+--[0,3,4,0,5,9,0,0,0]
 
 load :: [Int] -> String -> Puzzle
 load =undefined
