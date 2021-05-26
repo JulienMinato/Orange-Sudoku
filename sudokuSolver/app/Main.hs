@@ -30,9 +30,9 @@ sudokuResult = do
 
 graphcolResult :: IO()
 graphcolResult = do 
-    putStrLn "graphcolResult\n"
+    putStrLn "an instance of a graph coloring problem (Kempe, 1879)\n"
 
-    print (solver (graphcoloring 5 diffcolor 3))
+    print (solver (graphcoloring 5 position 3))
 
 testResult :: IO()
 testResult = do

@@ -17,11 +17,47 @@ graphcoloring nodes adj colors = CSP{vars=nodes,vals=colors,rel=ok}
 
 
 --adj = [(1,2)-> True, (1,3)-> True, (2,3)->True]
-diffcolor :: ((Var,Var) -> Bool)
+position :: (Int,Int) -> Bool
+--diffcolor (ix,iy) = (ix /= iy)
 
-diffcolor (1,2) = True
-diffcolor (1,3) = True
-diffcolor (2,3) = True
+position (1,2) = True
+position (1,3) = True
+position (2,4) = True
+position (2,5) = True
+position (3,4) = True
+position (3,5) = True
+position (4,5) = True
+
+position (2,1) = True
+position (3,1) = True
+position (4,2) = True
+position (5,2) = True
+position (4,3) = True
+position (5,3) = True
+position (5,4) = True
+
+position (ix,iy) = not (ix /= iy)
+
+
+
+
+graphcoloringPrint :: [State] -> String
+graphcoloringPrint [] = "No solution"
+graphcoloringPrint (x:xs) = let State(a,_) = x
+                     in assignPrint a (length a) ++ "\n" ++ "\n" ++ graphcoloringPrint xs
+                          --show '\n
+assignPrint :: [Assignment] -> Int -> String
+assignPrint []     _ = ""
+assignPrint (x:xs) n = let _ := b = x
+                       in helper 1 b n ++ "\n" ++ assignPrint xs n
+
+helper :: Int -> Int -> Int -> String
+helper c x n = if c == x
+               then 'Q':(helper (c+1) x n)
+               else if c > n
+                    then " "
+                    else '*':(helper (c+1) x n)
+
 --graphcoloringTest = 5 [(1,2)-> True, (1,3)-> True, (2,3)->True] 3 
 
 -- 5 place, Wa, Or, Nt, Q, Ny 
