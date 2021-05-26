@@ -1,11 +1,15 @@
+-- ideas from https://wiki.haskell.org/Sudoku
+
 -- | Example: Sudoku solver Problem
 module Sudoku where
 
 import CSP
 
+
 import Data.Char
 import Control.Monad
 import Control.Applicative 
+
 
 import Data.Maybe (maybeToList)
 import Data.List (delete)
@@ -55,29 +59,49 @@ blockNum (row, col) = row - (row - 1) `mod` sqrtSize + (col - 1) `div` sqrtSize
 
 
 
-sudoku :: [[Int]] -> CSP
-sudoku = undefined
+-- sudoku :: [[Int]] -> CSP
+-- sudoku = undefined
+
+-- sudoku puz = CSP{vals=n,vars=n,rel=ok}
+--   where ok (col1 := row1) (col2 := row2) = (row1 /= row2) && abs (col1 - col2) /= abs (row1 - row2)
+
+sudoku :: [Int] -> CSP
+sudoku puz = CSP{vals=2,vars=2,rel=ok}
+
+ where ok (col1 := row1) (col2 := row2) = row1 /= row2 && col1 /= col2
 
 
 
+
+load :: [Int] -> String -> Puzzle
+load =undefined
+-- load xs s = do
+--              (line,s1)   <- zip xs $ lines s
+--              (column,c1) <- zip xs s1 
+             --case c1 of 
+                --'.' -> return [[0]]
+                --c   -> let i = digitToInt c in return [[just i]]
 
 --Test sudoku
 --putStr solver sudoku sudokuTest
 
 -- Replace one element of a list.
 -- Coordinates are 1-based.
+
+
+
 replace :: Int -> a -> [a] -> [a]
 replace i x (y:ys)
-​| i > 1     = y : replace (i - 1) x ys
-​| otherwise = x : ys
+    | i > 1     = y : replace (i - 1) x ys
+    | otherwise = x : ys
 replace _ _ _ = []
 
 -- Replace one element of a 2-dimensional list.
 -- Coordinates are 1-based.
 replace2 :: Int -> Int -> a -> [[a]] -> [[a]]
 replace2 i j x (y:ys)
-​| i > 1     = y : replace2 (i - 1) j x ys
-​| otherwise = replace j x y : ys
+    | i > 1     = y : replace2 (i - 1) j x ys
+    | otherwise = replace j x y : ys
 replace2 _ _ _ _ = []
 
 
@@ -104,3 +128,7 @@ addhframe s =
     in  
         ys1 ++ s2 ++ ys2 ++ s2 ++ zs2
     where s2 = ["--- --- ---"]   
+
+
+
+

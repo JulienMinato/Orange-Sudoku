@@ -99,6 +99,7 @@ complete = null . unassigned
 
 
 --The lastAssignment operator returns the assignment with which the state was most recently extended.
+--for one solution
 lastAssignment :: State -> Assignment
 lastAssignment = head . assignments
 
@@ -145,6 +146,7 @@ solver csp = test csp candidates
     where candidates = generate csp
 
 
+solverOne = head.solver
 
 -- The graphcoloring function constructs an instance of a graph coloring, 
 -- specified by a number of nodes, a set of edges between nodes
@@ -154,8 +156,6 @@ solver csp = test csp candidates
 --   a pair of color assignments provided that the colors are different or there is no edge between the nodes.
 
 
--- graphcoloring :: Int -> ((Var,Var) -> Bool) -> Int -> CSP
--- graphcoloring nodes adj colors = CSP{vars=nodes,vals=colors,rel=ok}
---         where ok (n1 := c1) (n2 := c2) = c1 /= c2 || not (adj (n1,n2))
+
 
 

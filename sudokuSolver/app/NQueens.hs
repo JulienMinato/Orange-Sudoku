@@ -31,7 +31,7 @@ helper c x n = if c == x
                then 'Q':(helper (c+1) x n)
                else if c > n
                     then " "
-                    else '.':(helper (c+1) x n)
+                    else '*':(helper (c+1) x n)
 
 --prettyprintNQueens :: CSP -> [Int, Int]
 --prettyprintNQueens _ = [] 
