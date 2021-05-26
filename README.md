@@ -27,11 +27,11 @@ The CSP contains n variables and x1,x2,...,xn that need to be evaluated and n do
 
 - How to run our project:
 
-  Step 1: Install Cabal from https://www.haskell.org/cabal/
+  Step 1: Install Cabal from https://www.haskell.org/cabal/ , run ## cabal install --lib csp
 
   Step 2: Open terminal and cd to the folder: /Orange-Sudoku/sudokuSolver
 
-  Step 3: Run the command ‘ $ cabal run ’
+  Step 3: Run the command ‘ $ cabal init --interactive && cabal run ’
 
   Step 4: Enter a number for the question: "N queens puzzle: how many queens?" and you will have all the answers!
   
@@ -82,9 +82,8 @@ The CSP contains n variables and x1,x2,...,xn that need to be evaluated and n do
         
       - Eric
         https://github.com/walkie/CSP-Solver/blob/master/CSP.hs
-
-
-NORDIN, T., & TOLMACH, A. (2001). Modular lazy search for constraint satisfaction problems. Journal of Functional Programming, 11(5), 557-587. Retrieved from http://proxy.library.oregonstate.edu.ezproxy.proxy.library.oregonstate.edu/login?url=https://www-proquest-com.ezproxy.proxy.library.oregonstate.edu/scholarly-journals/modular-lazy-search-constraint-satisfaction/docview/213461142/se-2?accountid=13013
+        
+      - NORDIN, T., & TOLMACH, A. (2001). Modular lazy search for constraint satisfaction problems. Journal of Functional Programming, 11(5), 557-587
 
 
 
