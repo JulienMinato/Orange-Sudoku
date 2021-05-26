@@ -5,14 +5,14 @@ module Sudoku where
 
 import CSP
 
-
+--cabal install --dependencies-only
 import Data.Char
 import Control.Monad
 import Control.Applicative 
+import Control.Monad.CSP
 
-
-import Data.Maybe (maybeToList)
-import Data.List (delete)
+import Data.Maybe
+import Data.List
 
 --The sudoku solver problem looks 
 --The domain is the scope of the variable which ranges across all digits between 1 and 9 
@@ -52,6 +52,7 @@ blocks = [[(x + i, y + j) | i <- [1..sqrtSize], j <- [1..sqrtSize]] |
          x <- [0,sqrtSize..size-sqrtSize],
          y <- [0,sqrtSize..size-sqrtSize]]
 
+
 -- The one-based number of the block that a cell is contained in.
 blockNum :: Cell -> Int
 blockNum (row, col) = row - (row - 1) `mod` sqrtSize + (col - 1) `div` sqrtSize
@@ -77,15 +78,40 @@ load =undefined
 -- load xs s = do
 --              (line,s1)   <- zip xs $ lines s
 --              (column,c1) <- zip xs s1 
-             --case c1 of 
-                --'.' -> return [[0]]
-                --c   -> let i = digitToInt c in return [[just i]]
+--              case c1 of 
+--                 '.' -> return [(0:x)]
+--                 c   -> let i = digitToInt c in return [(just i :x)]
 
 --Test sudoku
 --putStr solver sudoku sudokuTest
 
 -- Replace one element of a list.
 -- Coordinates are 1-based.
+
+
+mapAllPairsM_ :: Monad m => (a -> a -> m b) -> [a] -> m ()
+mapAllPairsM_ f []     = return ()
+mapAllPairsM_ f (_:[]) = return ()
+mapAllPairsM_ f (a:l) = mapM_ (f a) l >> mapAllPairsM_ f l
+
+
+
+solveSudoku :: (Enum a, Eq a, Num a) => [[a]] -> [[a]]
+solveSudoku puzzle = oneCSPSolution $ do
+  dvs <- mapM (mapM (\a -> mkDV $ if a == 0 then [1 .. 9] else [a])) puzzle
+  mapM_ assertRowConstraints dvs
+  mapM_ assertRowConstraints $ transpose dvs
+  sequence_ [assertSquareConstraints dvs x y | x <- [0,3,6], y <- [0,3,6]]
+  return dvs
+      where assertRowConstraints =  mapAllPairsM_ (constraint2 (/=))
+            assertSquareConstraints dvs i j = 
+                mapAllPairsM_ (constraint2 (/=)) [(dvs !! x) !! y | x <- [i..i+2], y <- [j..j+2]]
+
+
+
+
+
+
 
 
 

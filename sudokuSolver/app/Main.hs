@@ -20,12 +20,15 @@ queensResult = do
 
 sudokuResult :: IO()
 sudokuResult = do
-    putStrLn "Sudoku\n"
-    i <- readFile "/Users/liang/Projects/GitHub/Orange-Sudoku/sudokuSolver/app/sudoku.txt" 
+    putStrLn "Sudoku Question\n"
+    mapM_ print sudokuTest
+    putStrLn "\nThe Solution\n"
+    --i <- readFile "/Users/liang/Projects/GitHub/Orange-Sudoku/sudokuSolver/app/sudoku.txt" 
+    --i <- readFile "/Users/liang/Projects/GitHub/Orange-Sudoku/sudokuSolver/app/data/top95.txt" 
     --i <- readFile "sudoku.txt" 
-    prettyprint . lines $ i
+    --prettyprint . lines $ i
     --load [1..9] i 
-
+    mapM_ print (solveSudoku sudokuTest)
 
 
 graphcolResult :: IO()
