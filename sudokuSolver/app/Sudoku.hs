@@ -8,6 +8,7 @@ import CSP
 import Data.Char
 import Control.Monad
 import Control.Applicative 
+import Control.Monad.CSP
 
 
 import Data.Maybe
@@ -41,7 +42,7 @@ sudokuTest2 =   [[0,0,3,0,2,0,6,0,0],
                 [0,0,2,6,0,9,5,0,0],
                 [8,0,0,2,0,3,0,0,9],
                 [0,0,5,0,1,0,3,0,0]]
-                
+
 
 -- this defination ideas from https://wiki.haskell.org/Sudoku
 
