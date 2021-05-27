@@ -30,9 +30,9 @@ sudokuResult = do
     --i <- readFile "sudoku.txt" 
     --prettyprint . lines $ i
     --load [1..9] i 
-    mapM_ print (solveSudoku sudokuTest)
+--    mapM_ print (solveSudoku sudokuTest)
     putStrLn "\n\nThe Solution2\n\n"
-    mapM_ print (solveSudoku sudokuTest2)
+--    mapM_ print (solveSudoku sudokuTest2)
 
 
 graphcolResult :: IO()
