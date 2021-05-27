@@ -54,6 +54,8 @@ The CSP contains n variables and x1,x2,...,xn that need to be evaluated and n do
 ### Milestone #2
 ***********************
 
+- Project description(updated):
+
    The function queens takes the input of how many queens need to be placed and it formulates it into a CSP and outputs CSP. The constraints used in this case are if there is a queen q1 is on col i then another queen q2 should not be placed on the same column, col i. Similarly the other constraint is if queen q1 is placed on row i then another queen q2 should not be placed on the same row, row i. The other constraint in this case is that if there is a queen q1 on col i and row j then another queen q2 should not be placed on col m and row n such that abs (col i - col m) = abs (row j - row n). The CSP solver is used to solve this CSP formulation. nQueenPrint is used for pretty printing the solution. getNum is a guard that is used to ensure that the argument for queens is numeric.
 
    The function graphcoloring takes the input of the number of the vertices in the graph, positions of the vertices in the graph and number of colors. The constraint in graph coloring is that no neighbor vertices have the same color or if vertices have same color they are not connected. The graph coloring function formulates and outputs the CSP. The mapM_ is used to print the result. In this case mapM_ is used as there is nothing to be returned. 
@@ -66,7 +68,7 @@ These three steps apply row, column and square constraints.
 
 - How to run our project:
 
-  Step 1: Install Cabal from https://www.haskell.org/cabal/ and 'cabal install --lib csp'
+  Step 1: Install Cabal from https://www.haskell.org/cabal/
 
   Step 2: Open terminal and cd to the folder: /Orange-Sudoku/sudokuSolver
 
@@ -84,8 +86,7 @@ These three steps apply row, column and square constraints.
   
   https://www.youtube.com/watch?v=3TzLcpQFc4E
 
-Design decisions:
-
+- Design decisions:
 
    Presently list comprehension and eta reductions were used instead of monadic notations for CSP, nQueens and graph coloring. However monadic notations were used for solving sudoku wherein mapM_ was used to map constraints. We plan to represent assignments as a Data.Map from Var to [Value]. We plan to use constraint that has a set of k variables, and a k-arity relationship between those variables that must hold true for the constraint to be satisfied.The variables will be initialized from the range of values in the domain and the values that violate the constraint will be pruned until the last value is left. The assignments will be stored in map which will be the state for the State Monad. We will also explore monad transformers as reader monad can be used to keep track of constraints. 
 
