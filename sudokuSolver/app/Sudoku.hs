@@ -13,6 +13,7 @@ import Control.Monad.CSP
 
 import Data.Maybe
 import Data.List
+import Data.Char
 
 
 --The sudoku solver problem looks 
@@ -96,8 +97,21 @@ load =undefined
 --                 '.' -> return [[0]]
 --                 c   -> let i = digitToInt c in return [[just i]]]
 
+
+
+            
 --Test sudoku
 --putStr solver sudoku sudokuTest
+
+--testload ::  String -> [String]
+
+--
+
+--digitToInt
+--charToint :: [char] -> [Int]
+test1 = ["0","0","3","0","2","0","6"]
+
+stringToint = map digitToInt
 
 
 

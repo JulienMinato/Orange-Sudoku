@@ -8,10 +8,22 @@ import System.Environment
 import Data.Maybe
 import Control.Monad
 import Control.Monad.CSP
+import System.IO.Unsafe
+import Data.List
+
 
 --input Int 
 getNum :: (Read a, Num a, Show a) => IO a
 getNum = readLn
+
+
+loadSudoku :: [(Int, [[Int]])]
+--loadSudoku = let f = unsafePerformIO $ readFile "sudoku50.txt"
+loadSudoku = let f = unsafePerformIO $ readFile "/Users/liang/Projects/GitHub/Orange-Sudoku/sudokuSolver/app/sudoku50.txt"
+      in map (\(g:gs) -> (read $ drop 5 g, solveSudoku $ map (\g -> map (read . (:[])) g) gs))
+             $ groupBy (\a b -> not $ isPrefixOf "Grid" b) $ lines f
+
+
 
 queensResult :: IO()
 queensResult = do
@@ -23,12 +35,13 @@ sudokuResult :: IO()
 sudokuResult = do
     putStrLn "\n\nSudoku Question1\n\n"
     mapM_ print sudokuTest
-    putStrLn"\nImport a Sudoku example from a file: \n"
+    --putStrLn"\nImport a Sudoku example from a file: \n"
     putStrLn "\n\nSudoku Question2\n\n"
     
     mapM_ print sudokuTest2
     putStrLn "\n\nThe Solution1\n\n"
     --i <- readFile "/Users/liang/Projects/GitHub/Orange-Sudoku/sudokuSolver/app/sudoku.txt" 
+    --putStrLn i
     --i <- readFile "/Users/liang/Projects/GitHub/Orange-Sudoku/sudokuSolver/app/data/top95.txt" 
     --i <- readFile "sudoku.txt" 
     --prettyprint . lines $ i
@@ -48,7 +61,16 @@ graphcolResult = do
 testResult :: IO()
 testResult = do
     putStrLn "test\n"
+    putStrLn"\nImport a Sudoku example from a file: \n"
+    --i <- readFile "/Users/liang/Projects/GitHub/Orange-Sudoku/sudokuSolver/app/sudoku.txt"
+    --putStrLn i
+    mapM_ print loadSudoku
+    --print read i :: Integer
     --solver (graphcoloring 5 diffcolor 3)
+
+
+
+
 
 
 

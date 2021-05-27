@@ -146,6 +146,7 @@ solver csp = test csp candidates
     where candidates = generate csp
 
 
+solverOne :: CSP -> State
 solverOne = head.solver
 
 
