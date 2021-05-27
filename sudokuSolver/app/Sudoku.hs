@@ -8,7 +8,7 @@ import CSP
 import Data.Char
 import Control.Monad
 import Control.Applicative 
-import Control.Monad.CSP
+
 
 import Data.Maybe
 import Data.List

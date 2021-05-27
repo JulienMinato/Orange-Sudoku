@@ -7,6 +7,7 @@ import Control.Exception
 import System.Environment
 import Data.Maybe
 import Control.Monad
+import Control.Monad.CSP
 
 --input Int 
 getNum :: (Read a, Num a, Show a) => IO a
