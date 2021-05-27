@@ -31,7 +31,7 @@ The CSP contains n variables and x1,x2,...,xn that need to be evaluated and n do
 
   Step 2: Open terminal and cd to the folder: /Orange-Sudoku/sudokuSolver
 
-  Step 3: Run the command ‘ $ cabal init --interactive && cabal run ’  Or Try 'cabal install --dependencies-only'.
+  Step 3: Run the command ‘ $ cabal run ’. 
 
   Step 4: Enter a number for the question: "N queens puzzle: how many queens?" and you will have all the answers!
   
