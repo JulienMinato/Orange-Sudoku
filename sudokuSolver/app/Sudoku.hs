@@ -105,7 +105,7 @@ mapAllPairsM_ f (a:l) = mapM_ (f a) l >> mapAllPairsM_ f l
 
 
 
-solveSudoku :: (Enum a, Eq a, Num a) => [[a]] -> [[a]]
+{- solveSudoku :: (Enum a, Eq a, Num a) => [[a]] -> [[a]]
 solveSudoku puzzle = oneCSPSolution $ do
   dvs <- mapM (mapM (\a -> mkDV $ if a == 0 then [1 .. 9] else [a])) puzzle
   mapM_ assertRowConstraints dvs
@@ -116,7 +116,7 @@ solveSudoku puzzle = oneCSPSolution $ do
             assertSquareConstraints dvs i j = 
                 mapAllPairsM_ (constraint2 (/=)) [(dvs !! x) !! y | x <- [i..i+2], y <- [j..j+2]]
 
-
+-}
 
 
 replace :: Int -> a -> [a] -> [a]
