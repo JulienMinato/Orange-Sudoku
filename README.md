@@ -27,13 +27,24 @@ The CSP contains n variables and x1,x2,...,xn that need to be evaluated and n do
 
 - How to run our project:
 
-  Step 1: Install Cabal from https://www.haskell.org/cabal/ , run '$ cabal install --lib csp"
+  Step 1: Install Cabal from https://www.haskell.org/cabal/
 
   Step 2: Open terminal and cd to the folder: /Orange-Sudoku/sudokuSolver
 
-  Step 3: Run the command ‘ $ cabal run ’. 
+  Step 3: Run the command ‘ $ cabal run ’, if succeed, you will see 3 types of CSPs. 
 
-  Step 4: Enter a number for the question: "N queens puzzle: how many queens?" and you will have all the answers!
+  Step 4: Type '1' for testing our N-Queen problem, '2' for Soduku, '3' for Graghcoloring. For the N-Queen, it only works when input is at least 4. The basic rule of Graphcoloring problem is two same color vertexes can not be connected to each other, our implementation just shows all the solutions on the terminal directly, the left hand side of ":=" represents the position while the right hand side is the color option. For now, we are using 5 vertexes 3 color, the output still has the type constructor "State" but it is readable. We will try to do this in a more aesthetic way (like the NQueen problem) if possible.
+  Here is a picture for better understanding the graghcoloring problem:
+ 
+  ![graphcolor](https://user-images.githubusercontent.com/56494388/119771665-e73cc200-be72-11eb-9973-c7d8c9294e6e.png)
+
+  Step 5: The program will quit automatically after finishing one round, just using 'cabal run' to keep testing.
+  
+  
+  P.S. If you still having trouble running our project, here is a walk-through video:
+  
+  https://www.youtube.com/watch?v=3TzLcpQFc4E
+  
   
 
 - Design questions for workshop discussion:
