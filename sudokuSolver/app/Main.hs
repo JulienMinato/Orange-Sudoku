@@ -23,7 +23,9 @@ sudokuResult :: IO()
 sudokuResult = do
     putStrLn "\n\nSudoku Question1\n\n"
     mapM_ print sudokuTest
+    putStrLn"\nImport a Sudoku example from a file: \n"
     putStrLn "\n\nSudoku Question2\n\n"
+    
     mapM_ print sudokuTest2
     putStrLn "\n\nThe Solution1\n\n"
     --i <- readFile "/Users/liang/Projects/GitHub/Orange-Sudoku/sudokuSolver/app/sudoku.txt" 
@@ -40,7 +42,8 @@ graphcolResult :: IO()
 graphcolResult = do 
     putStrLn "an instance of a graph coloring problem (Kempe, 1879)\n"
 
-    mapM_ print (solver (graphcoloring 5 position 3))
+    --mapM_ print (solver (graphcoloring 5 position 3))
+    putStr (graphColorPrint (solver (graphcoloring 5 position 3)))
 
 testResult :: IO()
 testResult = do
@@ -54,7 +57,10 @@ main :: IO ()
 main = do
     
 
-    putStrLn "Which CSPs problem do you want to test?\n"
+    putStrLn "\n\n\n ******Which CSPs problem do you want to test?******\n"
+    
+
+    putStrLn "Please enter a number: \n\n"
 
     putStrLn "***(1): N Queen Problem\n"
     putStrLn "***(2): Sudoku Solver\n"
@@ -68,5 +74,5 @@ main = do
         2 -> sudokuResult
         3 -> graphcolResult
         0 -> testResult
-    
+        _ -> putStrLn "***Wrong input, please try again\n"
     -- print (solver (queens n))

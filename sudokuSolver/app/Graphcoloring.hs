@@ -1,5 +1,8 @@
 module Graphcoloring where
 
+import Data.Char
+
+
 import CSP
 
 -- The graphcoloring function constructs an instance of a graph coloring, 
@@ -50,3 +53,21 @@ graphcoloringPrint [] = "No solution"
 -- 5 place, Wa, Or, Nt, Q, Ny 
 -- 3 color red green blue
 -- red = 1, green = 2, blue = 3 
+
+graphColorPrint :: [State] -> String
+graphColorPrint (x:xs) = helper1 x ++ "\n" ++ graphColorPrint xs
+graphColorPrint []     = []
+
+helper1 :: State -> String
+helper1 (State (a,_)) = helper2 a
+
+helper2 :: [Assignment] -> String
+helper2 (x:xs) = let a := b = x
+                 in intToDigit (a+9): ':' : colorNumber b : ' ': (helper2 xs)
+helper2 []     = ""
+
+colorNumber :: Int -> Char
+colorNumber 1 = 'R'
+colorNumber 2 = 'G'
+colorNumber _ = 'B'
+
