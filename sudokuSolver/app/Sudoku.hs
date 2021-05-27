@@ -1,11 +1,10 @@
--- ideas from https://wiki.haskell.org/Sudoku
+module Sudoku where
 
 -- | Example: Sudoku solver Problem
-module Sudoku where
 
 import CSP
 
---cabal install --dependencies-only
+
 import Data.Char
 import Control.Monad
 import Control.Applicative 
@@ -13,6 +12,7 @@ import Control.Monad.CSP
 
 import Data.Maybe
 import Data.List
+
 
 --The sudoku solver problem looks 
 --The domain is the scope of the variable which ranges across all digits between 1 and 9 
@@ -31,6 +31,7 @@ sudokuTest=[[0,0,0,0,0,0,9,0,7],
             [0,3,4,0,5,9,0,0,0],
             [5,0,7,0,0,0,0,0,0]]
 
+
 sudokuTest2 =   [[0,0,3,0,2,0,6,0,0],
                 [9,0,0,3,0,5,0,0,1],
                 [0,0,1,8,0,6,4,0,0],
@@ -40,7 +41,9 @@ sudokuTest2 =   [[0,0,3,0,2,0,6,0,0],
                 [0,0,2,6,0,9,5,0,0],
                 [8,0,0,2,0,3,0,0,9],
                 [0,0,5,0,1,0,3,0,0]]
+                
 
+-- this defination ideas from https://wiki.haskell.org/Sudoku
 
 type PuzzleValue = Int
 type Cell = (Int, Int) -- One-based coordinates
@@ -82,6 +85,7 @@ blockNum (row, col) = row - (row - 1) `mod` sqrtSize + (col - 1) `div` sqrtSize
 
 --[0,3,4,0,5,9,0,0,0]
 
+--load from the string (file IO)
 load :: [Int] -> String -> Puzzle
 load =undefined
 -- load xs s = do
@@ -94,14 +98,15 @@ load =undefined
 --Test sudoku
 --putStr solver sudoku sudokuTest
 
--- Replace one element of a list.
--- Coordinates are 1-based.
 
 
-mapAllPairsM_ :: Monad m => (a -> a -> m b) -> [a] -> m ()
-mapAllPairsM_ f []     = return ()
-mapAllPairsM_ f (_:[]) = return ()
-mapAllPairsM_ f (a:l) = mapM_ (f a) l >> mapAllPairsM_ f l
+
+
+
+--External CSP library to solve Sudoku problems
+--using csp: Discrete constraint satisfaction problem (CSP) solver.
+-- Control.Monad.CSP
+--from https://hackage.haskell.org/package/csp
 
 
 
@@ -117,6 +122,17 @@ solveSudoku puzzle = oneCSPSolution $ do
                 mapAllPairsM_ (constraint2 (/=)) [(dvs !! x) !! y | x <- [i..i+2], y <- [j..j+2]]
 
 
+
+mapAllPairsM_ :: Monad m => (a -> a -> m b) -> [a] -> m ()
+mapAllPairsM_ f []     = return ()
+mapAllPairsM_ f (_:[]) = return ()
+mapAllPairsM_ f (a:l) = mapM_ (f a) l >> mapAllPairsM_ f l
+
+
+
+
+-- Replace one element of a list.
+-- Coordinates are 1-based.
 
 
 replace :: Int -> a -> [a] -> [a]

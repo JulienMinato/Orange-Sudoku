@@ -148,12 +148,6 @@ solver csp = test csp candidates
 
 solverOne = head.solver
 
--- The graphcoloring function constructs an instance of a graph coloring, 
--- specified by a number of nodes, a set of edges between nodes
---  (represented by a characteristic function on pairs of nodes),
---   and a number of colors. The CSP variables are the graph nodes, 
---   the values are the possible colors, and the oracle function returns True on 
---   a pair of color assignments provided that the colors are different or there is no edge between the nodes.
 
 
 
