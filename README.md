@@ -66,7 +66,7 @@ These three steps apply row, column and square constraints.
 
 - How to run our project:
 
-  Step 1: Install Cabal from https://www.haskell.org/cabal/
+  Step 1: Install Cabal from https://www.haskell.org/cabal/ and 'cabal install --lib csp'
 
   Step 2: Open terminal and cd to the folder: /Orange-Sudoku/sudokuSolver
 
